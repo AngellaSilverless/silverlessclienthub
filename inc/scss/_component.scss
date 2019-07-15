@@ -1,0 +1,77 @@
+/*! == COMPONENTS == */
+
+.button {
+    background: $brand-primary;
+    border: 0;
+    box-sizing: border-box;
+    padding: 0.5em 2em;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: $supporting-font;  
+    box-shadow: inset 0 0 0 2px transparent;
+    color: white;
+    font-size: inherit;
+    position: relative;
+    vertical-align: middle;
+    -webkit-appearance: none;
+    transition: background 0.5s ease, color 0.5s ease;
+    border-radius: 2px;
+  
+    &:hover {
+        background: $brand-tertiary;
+        color: white;
+    }
+    
+    &__ghost {
+        background: transparent;
+        box-shadow: inset 0 0 0 2px $brand-secondary;
+        color: $brand-secondary;
+        
+        &:hover {
+			background: white;
+			color: $brand-primary;
+        }
+    }
+}
+
+.logo-holder {
+    text-align: center;
+    margin-top: -10px;
+ 
+    #logo {
+        width:80px;
+        height:30px;
+    }
+
+    #silverless {
+        opacity:0.6;
+        transition:opacity 0.5s ease-in-out;
+    
+        path {
+            fill: white;
+        }
+    }
+
+    #created {
+        opacity:0;
+        transform: translateY(50px);
+        transition: 1s transform ease, 2s opacity ease;
+
+        path {
+            fill: white;
+        }
+    }
+
+    &:hover {
+        cursor:pointer;
+
+        #silverless {
+            opacity:0.8;
+        }
+
+        #created {
+              opacity:0.8;
+              transform: translateY(0);
+        }
+    }
+}

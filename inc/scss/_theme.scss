@@ -1,0 +1,151 @@
+/*! == THEME STYLES == */
+
+/*===========GLOBAL==========*/
+
+*, :after, :before {
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+body {
+    font-size: 16px;
+}
+
+/*===========HEADER==========*/
+
+/*===========BODY==========*/
+
+.website-card {
+	position: relative;
+	background: $brand-light-grey;
+	margin-bottom: 2em;
+	
+	.type {
+		width: 60px;
+		height: 100%;
+		background: $brand-primary;
+		position: absolute;
+		border-radius: 5px;
+		padding: 5px;
+		display: flex;
+		align-items: flex-start;
+		justify-content: center;
+		
+		#flywheel-logo {
+			width: 90%;
+			padding-top: 7px;
+			
+		}
+		
+		#wpengine-logo {
+			width: 80%;
+			padding-top: 9px;
+		}
+	}
+}
+
+.wrapper-card {
+	margin-left: 60px;
+}
+
+.website-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	flex-wrap: wrap;
+	
+	h2 {
+		margin: 0;
+	}
+}
+
+.website-content {
+	line-height: 1.5;
+	
+	& > div {
+		display: inline-block;
+		width: 33%;
+	}
+	
+	.settings {
+		width: 100%;
+		margin-top: 0.83em;
+	}
+	
+	.heading {
+		margin-bottom: 0;
+	}
+	
+		
+	label {
+		text-transform: uppercase;
+		font-weight: 800;
+		padding-right: 0.3em;
+		cursor: pointer;
+		transition: color 0.3s ease;
+		
+		&:hover {
+			color: $brand-tertiary;
+		}
+	}
+	
+	span {
+		font-size: 1.2em;
+	}
+	
+	i {
+		padding-right: 0.3em;
+		font-size: 1.1em;
+	}
+}
+
+.wrapper-buttons {
+	margin-right: 50px;
+}
+
+.dates {
+	font-size: 0.8em;
+	
+	.heading {
+		display: inline-block;
+		
+		&:last-of-type {
+			margin-left: 1em;
+		}
+	}
+}
+
+.icon {
+	width: 35px;
+	height: 35px;
+	background: $brand-primary;
+	border-radius: 100%;
+	position: absolute;
+	top: 1em;
+	right: 1em;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: white;
+	cursor: pointer;
+	transition: background 0.5s ease;
+	
+	i {
+		font-size: 1.4em;
+		margin-top: 0;
+		margin-left: 0.2em;
+		transition: transform 0.5s ease, margin 0.5s ease;
+	}
+	
+	&.active i {
+		transform: rotate(90deg);
+		margin-top: 0.2em;
+		margin-left: 0;
+	}
+	
+	&:hover {
+		background: $brand-tertiary;
+	}
+}
+
+/*===========FOOTER==========*/

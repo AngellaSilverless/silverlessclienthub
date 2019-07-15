@@ -1,0 +1,21 @@
+/*! == MODULES == */
+
+.hero {
+	@include backgroundCover;
+	background: linear-gradient(-72deg,#dedede,#ffffff 16%,#dedede 21%,#ffffff 24%,#454545 27%,#dedede 36%,#ffffff 45%,#ffffff 60%,#dedede 72%,#ffffff 80%,#dedede 84%,#a1a1a1);
+	background-image: url("inc/img/background.jpg");
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    z-index: 50; 
+    padding-bottom: 0.5em;
+    border-bottom: 5px solid $brand-primary;
+    height: 15vh;
+    
+    img {
+		display: block;
+		width: 5em;
+    }
+}

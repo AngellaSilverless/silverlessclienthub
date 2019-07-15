@@ -1,0 +1,136 @@
+/*! == GLOBAL == */
+html {
+    font-size: 16px;
+    overflow-y: scroll;
+}
+ 
+html,
+body {
+    min-height: 100vh;
+    margin:0;
+    padding: 0;
+}
+
+body {
+    font-family: $body-font;
+    font-size: 1rem;
+    font-weight: 200;
+    background: hsl(0, 0%, 96%);
+    color: hsl(69, 2%, 31%);
+}
+
+main {
+    min-height: calc(100vh - 89px);
+}
+
+p {
+    font-size: 1.2em;
+    font-weight: 200;  
+    display: flex;
+    flex-basis: 100%;
+}
+
+a {
+	text-decoration: none;
+    display: inline-block;
+    line-height: 1.2em;
+    color: $brand-secondary;
+    transition:color 0.3s ease;
+
+    &:hover {
+        text-decoration: none;
+        color: $brand-dark-grey;
+    }  
+    
+    i {
+        line-height: 1.2em;
+        vertical-align: bottom;
+        transition:all 0.5s ease;
+    }
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+.container {
+	margin-left: auto;
+	margin-right: auto;
+    max-width: 1140px;
+}
+
+.heading {
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em; 
+    color: $brand-primary;         
+    
+    &__light {
+        color: white;
+    }
+    
+    &__alt-color {
+      color: $brand-dark-grey;
+    }
+    
+    &__xl {
+        font-size: 4em;
+        line-height: 0.75em;
+    }
+    
+    &__lg {      
+        font-size: 2em;
+    }  
+    
+    &__md {
+        font-size: 1.5em;    
+        font-weight: 400;    
+    }   
+    
+    &__sm {
+        font-size: 1.2em; 
+        font-weight: 400;       
+    }
+    
+    &__xs {
+        font-size: 0.75em;        
+    }   
+
+}
+
+/*===========HEADER==========*/
+
+.site-wrapper {
+    position: relative;
+}
+
+header {
+    position: fixed;
+    display: grid;
+    width: 100%;
+    z-index: 1000;
+}
+
+/*===========FOOTER==========*/
+
+.footer {
+	display: flex;
+	background: $brand-primary;
+	color: white;
+	
+	.logo-holder, .colophon {
+		flex: 50%;
+		display: flex;
+	}
+	
+	.logo-holder {
+		align-items: center;
+		justify-content: flex-start;
+	}
+	
+	.colophon {
+		align-items: flex-start;
+		justify-content: flex-end;
+	}
+}

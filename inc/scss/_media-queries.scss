@@ -1,0 +1,86 @@
+/*! == MEDIA QUERIES == */
+
+/*===========LARGE (1200px)==========*/
+
+@media only screen and (max-width: 1200px) {
+	
+/*---GLOBALS---*/ 
+
+.container {
+    max-width: 960px;
+}
+
+/*---HEADER---*/ 
+
+/*---CONTENT---*/
+
+/*---FOOTER---*/
+
+}/*---end large mq---*/
+
+
+/*===========MEDIUM (992px)==========*/
+
+@media only screen and (max-width: 992px) {
+	
+/*---GLOBALS---*/ 
+
+body {
+    font-size: 0.75em;
+}
+
+.container {
+    max-width: 720px;
+}
+
+/*---HEADER---*/
+
+/*---CONTENT---*/
+
+/*---FOOTER---*/
+  
+}/*---end medium mq---*/
+
+
+/*===========SMALL (768px)==========*/
+
+@media only screen and (max-width: 768px) {
+
+/*---GLOBALS---*/
+
+body {
+  font-size: 0.65em;
+}
+
+.container {
+    max-width: 540px;
+}
+
+/*---HEADER---*/
+
+/*---CONTENT---*/
+  
+/*---FOOTER---*/
+
+
+}/*---end small mq---*/
+
+
+/*===========EXTRA SMALL (576px)==========*/
+
+@media only screen and (max-width: 576px) {
+
+/*---GLOBALS---*/
+
+body {
+  font-size: 0.5em;
+}
+
+/*---HEADER---*/
+
+/*---CONTENT---*/
+
+/*---FOOTER---*/
+  
+}/*---end extra small mq---*/
+
