@@ -10,7 +10,7 @@ jQuery(document).ready(function( $ ) {
 
 /* COPY TO CLIPBOARD */
 
-	$("label").click(function() {
+	$("label.highlight").click(function() {
 		var el = $(this).next()[0];
 		var range = document.createRange();
 		range.selectNodeContents(el);
@@ -26,6 +26,20 @@ jQuery(document).ready(function( $ ) {
 		$(this).parents(".website-card").siblings().find(".wrapper-content").slideUp().prev().find(".icon").removeClass("active");
 		$(this).parents(".website-header").next().slideToggle();
 		$(this).toggleClass("active");
+	});
+	
+	$(".items input[type=checkbox]").change(function() {
+		$.ajax({
+			url:      ajax_object.ajax_url,
+			type:     "POST",
+			dataType: "JSON",
+			data: {
+				action: "update_checklist",
+				name:   $(this).val(),
+				value:  $(this).prop("checked"),
+				postID: $(this).attr("post-id")  
+			}
+		});
 	});
 
 

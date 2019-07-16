@@ -19,6 +19,10 @@ $websites = get_posts(array(
 	'orderby'     => 'title',
 	'order'       => 'ASC'
 ));
+	
+$groups = get_field("group" ,"options");
+
+$data = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}checklist");
 
 foreach($websites as $post):  setup_postdata($post); $type = get_field("site_type"); ?>
 
@@ -83,6 +87,8 @@ foreach($websites as $post):  setup_postdata($post); $type = get_field("site_typ
 			</div>
 			
 			<div class="wrapper-content pr1 pl1 pb1" style="display: none;">
+				
+				<!-- FTP Settings -->
 			
 				<?php if(get_field("site_type") == "wp_engine"): ?>
 				
@@ -94,7 +100,7 @@ foreach($websites as $post):  setup_postdata($post); $type = get_field("site_typ
 						
 						<div class="address mr2">
 							
-							<label><i class="far fa-clipboard"></i>FTP Address: </label>
+							<label class="highlight"><i class="far fa-clipboard"></i>FTP Address: </label>
 							
 							<span><?php echo $ftp["ftp_address"]; ?></span>
 							
@@ -102,7 +108,7 @@ foreach($websites as $post):  setup_postdata($post); $type = get_field("site_typ
 						
 						<div class="port">
 							
-							<label><i class="far fa-clipboard"></i>FTP Port: </label>
+							<label class="highlight"><i class="far fa-clipboard"></i>FTP Port: </label>
 							
 							<span><?php echo $ftp["ftp_port"]; ?></span>
 							
@@ -113,6 +119,8 @@ foreach($websites as $post):  setup_postdata($post); $type = get_field("site_typ
 				</div>
 				
 				<?php endif; ?>
+				
+				<!-- Authentication Settings -->
 				
 				<div class="website-content">
 					
@@ -130,7 +138,7 @@ foreach($websites as $post):  setup_postdata($post); $type = get_field("site_typ
 						
 						<div class="username">
 							
-							<label><i class="far fa-clipboard"></i>User Name: </label>
+							<label class="highlight"><i class="far fa-clipboard"></i>User Name: </label>
 							
 							<span><?php echo $auth[$item]["user_name"]; ?></span>
 							
@@ -138,7 +146,7 @@ foreach($websites as $post):  setup_postdata($post); $type = get_field("site_typ
 						
 						<div class="password">
 							
-							<label><i class="far fa-clipboard"></i>Password: </label>
+							<label class="highlight"><i class="far fa-clipboard"></i>Password: </label>
 							
 							<span><?php echo $auth[$item]["password"]; ?></span>
 							
@@ -146,6 +154,38 @@ foreach($websites as $post):  setup_postdata($post); $type = get_field("site_typ
 					</div>
 					
 					<?php endforeach; ?>
+					
+				</div>
+				
+				<!-- Checklist -->
+				
+				<div class="website-content">
+					
+					
+					<h2 class="heading heading__sm">Pre-Launch Checklist</h2>
+					
+				<?php
+				
+				$check = findElement($data, $post->ID);
+									
+				foreach($groups as $group): ?>
+				
+					<h3 class="heading heading__sm"><?php echo $group["label"]; ?></h3>
+					
+					<div class="items">
+					
+					<?php foreach($group["item"] as $item): ?>
+						
+						<div>
+							<input post-id="<?php echo $post->ID; ?>" id="<?php echo $item["name"] . "-" . $post->ID; ?>" type="checkbox" value="<?php echo $item["name"];?>" <?php echo ($check && $check->{$item["name"]}) ? "checked" : ""; ?>>
+							<label for="<?php echo $item["name"] . "-" . $post->ID; ?>" class="item-label"><?php echo $item["label"]; ?></label>
+						</div>
+					
+					<?php endforeach; ?>
+					
+					</div>
+				
+				<?php endforeach; ?>
 					
 				</div>
 				
@@ -160,3 +200,18 @@ foreach($websites as $post):  setup_postdata($post); $type = get_field("site_typ
 </div>
 
 <?php get_footer(); ?>
+
+
+<?php
+	
+function findElement($array, $v) {
+	$item = null;
+	foreach($array as $struct) {
+	    if ($v == $struct->ID) {
+	        $item = $struct;
+	        break;
+	    }
+	}
+	return $item;
+}
+?>

@@ -29,11 +29,15 @@ add_action('admin_menu', 'silverless_remove_menus');
 add_action( 'admin_menu', 'silverless_change_post_label' );
 add_action( 'init', 'silverless_change_post_object' );
 
-/*
-* Edit Columns Posts
-*/
+/* Edit Columns Posts */
 add_filter( 'manage_posts_columns', 'silverless_manage_columns' );
 add_action( 'manage_posts_custom_column' , 'silverless_custom_posts_column', 10, 2 );
+
+/* ACF Options Pages */
+add_action('acf/init', 'silverless_init_acf_options');
+
+/* Load Checklist Management */
+require_once("functions-checklist.php");
 
 
 /****************************************************/
@@ -45,6 +49,8 @@ function silverless_scripts() {
 	wp_enqueue_style( 'silverless-style', get_stylesheet_uri() );
 	
 	wp_enqueue_script( 'silverless-core-js', get_template_directory_uri() . '/inc/js/compiled.js', array('jquery'), true); 
+	
+	wp_localize_script('silverless-core-js', 'ajax_object', array('ajax_url' => admin_url( 'admin-ajax.php' )) );
 	
 }
 
@@ -80,53 +86,7 @@ height:auto;"/>
 }
 
 function silverless_custom_fonts() {
-  echo '
-<style>
-#menu-posts-camp .dashicons-admin-post:before{font-family:dashicons;content:"\f102"}#toplevel_page_testimonials .dashicons-admin-generic:before{font-family:dashicons;content:"\f101"}#toplevel_page_call-to-action .dashicons-admin-generic:before{font-family:dashicons;content:"\f488"}.taxonomy-where tr.form-field.term-description-wrap,body.taxonomy-what .form-field.term-description-wrap,body.taxonomy-when .form-field.term-description-wrap,body.taxonomy-where .form-field.term-description-wrap{display:none}#wpcontent,#wpfooter,#wpwrap{background:#cdc7c0}#adminmenu,#adminmenu .wp-submenu,#adminmenuback,#adminmenuwrap,#wpadminbar{background-color:#362b3a}#adminmenu .wp-has-current-submenu .wp-submenu,#adminmenu .wp-has-current-submenu .wp-submenu.sub-open,#adminmenu .wp-has-current-submenu.opensub .wp-submenu,#adminmenu a.wp-has-current-submenu:focus+.wp-submenu,.no-js li.wp-has-current-submenu:hover .wp-submenu{background-color:#302036}#adminmenu .wp-has-current-submenu .wp-submenu .wp-submenu-head,#adminmenu .wp-menu-arrow,#adminmenu .wp-menu-arrow div,#adminmenu li.current a.menu-top,#adminmenu li.wp-has-current-submenu a.wp-has-current-submenu,.folded #adminmenu li.current.menu-top,.folded #adminmenu li.wp-has-current-submenu{background:#312036;color:#e57732}ul#adminmenu a.wp-has-current-submenu:after,ul#adminmenu>li.current>a.current:after{border-right-color:#cdc7c0}#adminmenu .wp-submenu a:focus,#adminmenu .wp-submenu a:hover,#adminmenu a:hover,#adminmenu li.menu-top>a:focus{color:#e4652f}
-
-.post-type-page .acf-postbox {
-  background: hsl(283, 14%, 20%);
-  border-color: hsl(283, 14%, 20%);
-}
-
-.post-type-page #poststuff h2 {
-  font-size: 14px;
-  color: hsl(32, 12%, 78%);
-  border:none;
-  }
-
-.post-type-page .acf-fields>.acf-field {
-  border-color: hsl(30, 9%, 71%) !important;
-}
-
-.post-type-page .acf-flexible-content .layout {
-  background: hsl(32, 12%, 78%);
-  border: none;
-  margin-bottom:50px;
-}
-
-.post-type-page .acf-flexible-content .layout .acf-fc-layout-handle {
-    font-size:18px;
-    text-transform:uppercase;
-    font-weight:900;}
-
-.post-type-page .acf-flexible-content .layout .acf-fc-layout-order {
-  background: hsl(15, 73%, 46%);
-  font-size: 12px;
-  color: hsl(0, 0%, 100%);
-}
-
-.post-type-page .acf-flexible-content .no-value-message {
-  color: hsl(0, 0%, 100%);
-}
-
-.post-type-page .inside.acf-fields > .acf-field > .acf-label {
-    color: hsl(0, 0%, 100%);
-    text-transform: uppercase;
-    font-size: 24px;
-    }
-
-</style>';
+	echo '<style type="text/css">' . file_get_contents(__DIR__ . "/admin-settings/style-admin.css") . '</style>';;
 }
  
 function silverless_remove_menus(){
@@ -189,5 +149,19 @@ function silverless_custom_posts_column( $column, $post_id ) {
 	else if($column == "site_date") {
 		$date = get_post_meta( $post_id, 'dates_hosting', true );
 		echo $date ? date("d/m/Y", strtotime($date)) : "";
+	}
+}
+
+function silverless_init_acf_options() {
+ 
+	if( function_exists('acf_add_options_page') ) {
+		
+		acf_add_options_page(array(
+			'page_title' 	=> 'Checklist',
+			'menu_title'	=> 'Checklist',
+			'menu_slug' 	=> 'checklist',
+			'capability'	=> 'edit_posts',
+			'redirect'		=> false
+		));
 	}
 }
