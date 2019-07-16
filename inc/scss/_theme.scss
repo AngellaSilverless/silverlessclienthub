@@ -167,7 +167,7 @@ body {
 	.heading {
 		display: inline-block;
 		
-		&:last-of-type {
+		&:not(:first-of-type) {
 			margin-left: 1em;
 		}
 	}
