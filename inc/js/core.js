@@ -21,11 +21,10 @@ jQuery(document).ready(function( $ ) {
 		return false;
 	});
 	
-	$(".icon").click(function() {
-		var parent = 
+	$(".icon, .wrapper-title").click(function() {
 		$(this).parents(".website-card").siblings().find(".wrapper-content").slideUp().prev().find(".icon").removeClass("active");
 		$(this).parents(".website-header").next().slideToggle();
-		$(this).toggleClass("active");
+		$(this).parents(".website-header").find(".icon").toggleClass("active");
 	});
 	
 	$(".items input[type=checkbox]").change(function() {
